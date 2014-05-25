@@ -25,7 +25,47 @@ double_array* getValuesFromCsv(char* csv, char separator)
 		nb_vals++;
 	}
 	
+	//allocation de memoire du tableau
+	if( (a = malloc(sizeof(*a)) == NULL)
+		return NULL;
+
+	if(a->val = malloc(nb_vals* sizeof(*a->val)))
+	{
+		free(a);
+		return NULL;
+	}
 	
+	a->nb_vals = nb_vals;
+	p = csv;
+	
+	for(i = 0; p[o]; i++)
+	{
+		char* endptr;
+		a->val[i] = strtod(p, &endptr);
+		for(p = endptr; p[0] && (p[0] != separator); p++);
+		p++;
+
+		
+	}
+	return (a);
+}
+
+void double_array(double_array* a)
+{
+	if(a && a->val)
+		free(a-val);
+	if(a)
+		free(a);	
+}
+
+
+
+int main (int argc, char** argv)
+{
+
+	
+
+
 
 
 }
