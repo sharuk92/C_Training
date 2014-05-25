@@ -21,5 +21,24 @@ int create_tcp_client(const char* hostname, int port)
 		return -1;
 	}
 
+	if((socket_id = socket(PF_INET, SOCK_STREAM, 0)) == -1)
+	{
+		fprintf(stderr, "Impossible de creer une socket\n");
+		exit(EXIT_FAILURE);
+	}
 
+	optval = 1;
+	setsockopt(socket_id, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(int));
+	
+	sockname.sin_family = host-adress->h_addrType;
+	sockname.sin_port   = htons(port);
+	memcpy((char*) &(sockname.sin_addr.s_addr), host_address->h_addr, host_address->h_length);
+	
+	if((connect(socket_id, (struct sockaddr*) &sockname, sizeof(struct sockaddr_in))) == -1)
+	{
+		fprintf(stderr, "Impossible de connecter la socket au serveur '%s' \n", hostname);
+		return -1;
+	}
+
+	return (socket_id);
 }
